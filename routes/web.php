@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $products = Product::all();
+
+    return view('welcome', compact('products'));
 });
 
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');

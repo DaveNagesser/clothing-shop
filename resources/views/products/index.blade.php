@@ -25,5 +25,15 @@
         @endauth
     </nav>
 
-    <h1>Hallo op de product page</h1>
+    <h1 class="divide-red-700">Hallo op de product page</h1>
+
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+        @foreach ($products as $product)
+            <x-product-card :product="$product"/>
+        @endforeach
+
+    </div>
+
 </x-layout>
