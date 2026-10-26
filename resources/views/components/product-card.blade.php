@@ -11,7 +11,7 @@
     <div class="mt-4 space-y-2">
 
         <p class="text-sm text-gray-500">
-            {{ $product->category_id->name ?? 'Uncategorized' }}
+            {{ $product->category?->category_name ?? 'Uncategorized' }}
         </p>
 
         <h2 class="text-xl font-semibold text-gray-900">

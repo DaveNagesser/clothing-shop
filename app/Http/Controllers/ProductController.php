@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -9,32 +10,39 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->get();
+
         return view('products.index', compact('products'));
     }
 
     public function create()
     {
-        return view('products.create');
+        $categories = Category::query()->orderBy('category_name')->get();
+
+        return view('products.create', compact('categories'));
     }
 
-    //
-    public function store(Request $request) //info uit form halen
+    public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required|numeric|min:0'
-        ]); //data validatie
+        $validated = $request->validate([
+            'name' => 'required|string|min:3',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'brand' => 'required|string',
+            'category_id' => 'required|integer|exists:categories,id',
+            'image' => 'required|string',
+        ]);
 
-        $product = new Product();
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
+        $product = new Product;
+        $product->name = $validated['name'];
+        $product->description = $validated['description'];
+        $product->price = $validated['price'];
+        $product->image = $validated['image'];
+        $product->brand = $validated['brand'];
+        $product->category_id = $validated['category_id'];
 
         $product->save();
 
         return redirect()->route('products.index');
-
     }
 }
