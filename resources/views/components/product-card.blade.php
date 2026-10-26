@@ -1,42 +1,35 @@
-<div class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+<article
+    class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm group relative transition-transform duration-300 ease-in-out hover:z-10 hover:scale-[1.07]">
 
-    {{-- Product image --}}
-    <img
-        src="{{ $product->image }}"
-        alt="{{ $product->name }}"
-        class="h-48 w-full rounded-lg object-contain"
-    >
+    <a href="{{ route('products.show', $product) }}" class="block">
 
-    {{-- Product information --}}
-    <div class="mt-4 space-y-2">
+        <img
+            src="{{ $product->image }}"
+            alt="{{ $product->name }}"
+            class="h-48 w-full rounded-lg object-contain"
+        >
 
-        <p class="text-sm text-gray-500">
-            {{ $product->category?->category_name ?? 'Uncategorized' }}
-        </p>
+        <div class="mt-4 space-y-2 border-t border-gray-200 pt-4">
 
-        <h2 class="text-xl font-semibold text-gray-900">
-            {{ $product->name }}
-        </h2>
+            <h2 class="text-xl font-semibold text-gray-900">
+                {{ $product->name }}
+            </h2>
 
-        <p class="text-sm text-gray-600">
-            {{ $product->description }}
-        </p>
+            <p class="text-lg font-bold text-green-700">
+                €{{ number_format($product->price, 2) }}
+            </p>
 
-        <p class="text-lg font-bold text-green-700">
-            €{{ number_format($product->price, 2) }}
-        </p>
+            <p class="text-sm text-gray-500">
+                Brand: {{ $product->brand }}
+            </p>
 
-        <p class="text-sm text-gray-500">
-            Brand: {{ $product->brand }}
-        </p>
+            <p class="text-sm">
+                @if ($product->purchased > 0)
+                    <span class="text-green-600">In stock</span>
+                @else
+                    <span class="text-red-600">Out of stock</span>
+                @endif
+            </p>
 
-        <p class="text-sm">
-            @if ($product->purchased > 0)
-                <span class="text-green-600">In stock</span>
-            @else
-                <span class="text-red-600">Out of stock</span>
-            @endif
-        </p>
-
-    </div>
-</div>
+        </div>
+</article>
