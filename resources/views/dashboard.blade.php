@@ -1,17 +1,18 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<x-layout>
+    <section class="relative h-[200px] overflow-hidden">
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="relative z-10 p-12 text-black">
+            <h1 class="text-5xl font-bold mb-4">Your Profile</h1>
+            <p>Welcome, {{ auth()->user()->name }}!</p>
         </div>
+    </section>
+
+    <div class="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+        @foreach ($products as $product)
+            <x-product-card :product="$product"/>
+        @endforeach
+
+        
     </div>
-</x-app-layout>
+</x-layout>

@@ -52,4 +52,23 @@ class ProductController extends Controller
     {
         return view('products.show', compact('product'));
     }
+
+    public function edit(Product $product)
+    {
+    }
+
+    public function delete(Product $product)
+    {
+        $product->delete();
+
+        return redirect()->route('products.index');
+    }
+
+    public function showProfile(Request $request)
+    {
+        $user = $request->user();
+
+        $products = $user->products()->get();
+        return view('dashboard', compact('user', 'products'));
+    }
 }

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    $products = Product::all();
+    $products = Product::latest()->take(4)->get();
 
     return view('welcome', compact('products'));
 });
@@ -23,7 +23,8 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $products = auth()->user()->products()->get();
+    return view('dashboard', compact('products'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
