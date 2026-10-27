@@ -1,5 +1,6 @@
-<nav class="mx-auto flex min-h-[68px] max-w-[1600px] items-center justify-between gap-5 px-5 sm:px-8 lg:px-14"
-     aria-label="Hoofdnavigatie">
+<nav
+    class="mx-auto flex min-h-[68px] max-w-[1600px] items-center justify-between gap-5 px-5 sm:px-8 lg:px-14 border-b-2 border-[#756e5f]"
+    aria-label="Hoofdnavigatie">
     <a href="{{ url('/') }}"
        class="shrink-0 text-sm font-semibold uppercase tracking-[0.24em] sm:text-base">
         DEFIANCE

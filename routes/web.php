@@ -18,6 +18,9 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
+Route::get('/products/{product}', [ProductController::class, 'show'])
+    ->name('products.show');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

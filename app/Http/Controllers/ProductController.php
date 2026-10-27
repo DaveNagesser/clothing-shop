@@ -11,8 +11,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('category')->get();
+        $categories = Category::all();
 
-        return view('products.index', compact('products'));
+        return view('products.index', compact('products', 'categories'));
     }
 
     public function create()
@@ -44,5 +45,10 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('products.index');
+    }
+
+    public function show(Product $product)
+    {
+        return view('products.show', compact('product'));
     }
 }

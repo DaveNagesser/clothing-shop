@@ -1,7 +1,8 @@
-<article
-    class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm group relative transition-transform duration-300 ease-in-out hover:z-10 hover:scale-[1.07]">
+<a href="{{ route('products.show', $product) }}"
+   class="group block w-full min-w-0">
 
-    <a href="{{ route('products.show', $product) }}" class="block">
+    <article
+        class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm group relative transition-transform duration-300 ease-in-out hover:z-10 hover:scale-[1.07] h-full">
 
         <img
             src="{{ $product->image }}"
@@ -32,4 +33,4 @@
             </p>
 
         </div>
-</article>
+    </article>

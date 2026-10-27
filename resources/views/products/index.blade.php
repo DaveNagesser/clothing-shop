@@ -1,34 +1,48 @@
-<x-layout title="Products">
-    <nav class="flex items-center justify-end gap-4">
-        @auth
-            <a
-                href="{{ url('/dashboard') }}"
-                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
+<x-layout>
+    <div
+        class="mb-3 flex flex-col items-start justify-between gap-4 border-b border-gray-200 p-2 sm:flex-row sm:items-center">
+
+        <div class="relative">
+            <label for="category" class="sr-only">Filter op categorie</label>
+
+            <select
+                id="category"
+                name="category"
+                class="min-w-52 cursor-pointer appearance-none border-1 bg-transparent py-2 pl-0 pr-10 text-sm font-medium text-gray-900 focus:outline-none focus:ring-0"
             >
-                Dashboard
-            </a>
-        @else
-            <a
-                href="{{ route('login') }}"
-                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                <option value="">Alle categorieën</option>
+
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">
+                        {{ $category->category_name }}
+                    </option>
+                @endforeach
+            </select>
+
+        </div>
+
+        {{-- Nieuw product toevoegen --}}
+        <a
+            href="{{ route('products.create') }}"
+            class="inline-flex items-center justify-center gap-2 bg-black px-5 py-3 text-sm font-medium text-white transition hover:bg-gray-800"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.8"
             >
-                Log in
-            </a>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14"/>
+            </svg>
 
-            @if (Route::has('register'))
-                <a
-                    href="{{ route('register') }}"
-                    class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                    Register
-                </a>
-            @endif
-        @endauth
-    </nav>
+            Nieuw product toevoegen
+        </a>
 
-    <h1 class="divide-red-700">Hallo op de product page</h1>
+    </div>
 
-
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-1 mb-1">
 
         @foreach ($products as $product)
             <x-product-card :product="$product"/>

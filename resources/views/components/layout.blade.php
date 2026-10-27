@@ -20,7 +20,7 @@
 </main>
 
 <footer class="border-t border-black/10 px-5 py-7 text-center text-xs text-[#77736d] sm:px-8">
-    © {{ date('Y') }} JOUW MERK. Alle rechten voorbehouden.
+    © {{ date('Y') }} DEFIANCE. Alle rechten voorbehouden.
 </footer>
 </body>
 </html>

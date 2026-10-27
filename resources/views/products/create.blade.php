@@ -1,4 +1,4 @@
-<x-layout title="Create Product">
+<x-layout>
 
     <h1 class="create_title"> Create new product</h1>
 

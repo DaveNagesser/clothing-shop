@@ -3,7 +3,6 @@
     <header class="sticky top-0 z-30 border-b border-black/5 bg-[#f5f2ed]/95 backdrop-blur">
 
         <main>
-            {{-- HERO / BANNER: voeg later zelf een achtergrondafbeelding toe --}}
             <section class="relative h-[450px] overflow-hidden">
                 <img
                     src="{{ asset('images/hero.jpeg') }}"
@@ -21,7 +20,6 @@
                 </div>
             </section>
 
-            {{-- PRODUCTEN --}}
             <section id="collectie" class="mx-auto max-w-[1600px] px-5 pb-16 pt-9 sm:px-8 sm:pt-12 lg:px-14 lg:pb-24">
                 <div class="mb-6 flex items-end justify-between gap-4 sm:mb-7">
                     <div>
@@ -37,7 +35,6 @@
 
                 <div class="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
                     @foreach (($products ?? collect()) as $product)
-                        {{-- Pas de componentnaam/props aan als jouw product-card anders heet. --}}
                         <x-product-card :product="$product"/>
                     @endforeach
                 </div>
