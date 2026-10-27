@@ -43,6 +43,7 @@ class ProductController extends Controller
         $product->category_id = $validated['category_id'];
 
         $product->save();
+        $request->user()->products()->attach($product->id);
 
         return redirect()->route('products.index');
     }
