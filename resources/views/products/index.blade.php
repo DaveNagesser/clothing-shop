@@ -5,20 +5,22 @@
         <div class="relative">
             <label for="category" class="sr-only">Filter op categorie</label>
 
-            <select
-                id="category"
-                name="category"
-                class="min-w-52 cursor-pointer appearance-none border-1 bg-transparent py-2 pl-0 pr-10 text-sm font-medium text-gray-900 focus:outline-none focus:ring-0"
-            >
-                <option value="">Alle categorieën</option>
+            <form action="{{ route('products.index') }}" method="GET">
+                <select
+                    id="category"
+                    onchange="this.form.submit()"
+                    name="category"
+                    class="min-w-52 cursor-pointer appearance-none border-1 bg-transparent py-2 pl-0 pr-10 text-sm font-medium text-gray-900 focus:outline-none focus:ring-0"
+                >
+                    <option value="">Alle categorieën</option>
 
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">
-                        {{ $category->category_name }}
-                    </option>
-                @endforeach
-            </select>
-
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" @selected(request('category')==$category->id)>
+                            {{ $category->category_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
         </div>
 
         {{-- Nieuw product toevoegen --}}

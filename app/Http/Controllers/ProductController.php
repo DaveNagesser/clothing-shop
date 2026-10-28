@@ -8,10 +8,21 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->get();
-        $categories = Category::all();
+        $categories = Category::query()
+            ->orderBy('category_name')
+            ->get();
+
+        $categoryId = $request->input('category');
+
+        $query = Product::with('category');
+
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        }
+
+        $products = $query->get();
 
         return view('products.index', compact('products', 'categories'));
     }
@@ -53,8 +64,28 @@ class ProductController extends Controller
         return view('products.show', compact('product'));
     }
 
-    public function edit(Product $product)
+    public function edit(Request $request, Product $product)
     {
+        $categories = Category::query()->orderBy('category_name')->get();
+        $ownProduct = $request->user()->products()->where('products.id', $product->id)->exists();
+        abort_unless($ownProduct, 403);
+
+        return view('products.edit', compact('product', 'categories'));
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|min:3',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'brand' => 'required|string',
+            'category_id' => 'required|integer|exists:categories,id',
+            'image' => 'required|string',
+        ]);
+
+        $product->update($validated);
+        return redirect()->route('dashboard');
     }
 
     public function delete(Request $request, Product $product)

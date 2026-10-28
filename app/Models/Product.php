@@ -16,4 +16,13 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, 'user_products', 'products_id', 'users_id');
     }
+
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'brand',
+        'category_id',
+        'image',
+    ];
 }
