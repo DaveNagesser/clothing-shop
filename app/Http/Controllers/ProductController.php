@@ -57,11 +57,13 @@ class ProductController extends Controller
     {
     }
 
-    public function delete(Product $product)
+    public function delete(Request $request, Product $product)
     {
-        $product->delete();
+        $ownProduct = $request->user()->products()->where('products.id', $product->id)->exists();
+        abort_unless($ownProduct, 403);
 
-        return redirect()->route('products.index');
+        $product->delete();
+        return redirect()->route('dashboard');
     }
 
     public function showProfile(Request $request)

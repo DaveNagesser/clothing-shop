@@ -35,7 +35,9 @@
 
                 <div class="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
                     @foreach (($products ?? collect()) as $product)
-                        <x-product-card :product="$product"/>
+                        <div class="min-w-0">
+                            <x-product-card :product="$product"/>
+                        </div>
                     @endforeach
                 </div>
             </section>

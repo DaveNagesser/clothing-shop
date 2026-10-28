@@ -32,5 +32,38 @@
                 @endif
             </p>
 
+            @if (auth()->check() && auth()->user()->products()->where('products.id', $product->id)->exists())
+
+                <div class="flex items-center gap-2">
+
+                    <a
+                        href="{{ route('products.edit', $product) }}"
+                        onclick="event.stopPropagation()"
+                        class="rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 transition hover:bg-gray-100"
+                    >
+                        Edit
+                    </a>
+
+                    <form
+                        action="{{ route('products.destroy', $product) }}"
+                        method="POST"
+                        onclick="event.stopPropagation()"
+                        onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?')"
+                    >
+                        @csrf
+                        @method('DELETE')
+
+                        <button
+                            type="submit"
+                            class="rounded-md border border-red-200 px-3 py-1.5 text-xs font-medium text-red-600 transition hover:bg-red-600 hover:text-white"
+                        >
+                            Delete
+                        </button>
+                    </form>
+
+                </div>
+
+            @endif
         </div>
     </article>
+</a>
