@@ -39,16 +39,24 @@
                     <p class="text-sm text-gray-500">
                         Brand: {{ $product->brand }}
                     </p>
-
-                    <p class="text-sm">
-                        @if ($product->purchased > 0)
-                            <span class="text-green-600">In stock</span>
-                        @else
-                            <span class="text-red-600">Out of stock</span>
-                        @endif
-                    </p>
+                    <div class="flex flex-row gap-2 place-content-between">
+                        <p class="text-sm">
+                            @if ($product->purchased > 0)
+                                <span class="text-green-600">In stock</span>
+                            @else
+                                <span class="text-red-600">Out of stock</span>
+                            @endif
+                        </p>
+                        @auth
+                            <a
+                                href="{{ route('reviews.create', $product->id) }}"
+                                class="text-sm text-blue-500 hover:text-blue-700"
+                            >
+                                write a review
+                            </a>
+                        @endauth
+                    </div>
                 </div>
-
             </section>
         </div>
     </main>
