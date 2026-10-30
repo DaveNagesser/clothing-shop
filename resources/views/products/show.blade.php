@@ -48,12 +48,18 @@
                             @endif
                         </p>
                         @auth
-                            <a
-                                href="{{ route('reviews.create', $product->id) }}"
-                                class="text-sm text-blue-500 hover:text-blue-700"
-                            >
-                                write a review
-                            </a>
+                            @if (auth()->user()->products()->count() >= 3)
+                                <a
+                                    href="{{ route('reviews.create', $product->id) }}"
+                                    class="text-sm text-blue-500 hover:text-blue-700"
+                                >
+                                    write a review
+                                </a>
+                            @else
+                                <p class="text-sm text-gray-500">
+                                    You must post 3 products to write a review.
+                                </p>
+                            @endif
                         @endauth
                     </div>
 
