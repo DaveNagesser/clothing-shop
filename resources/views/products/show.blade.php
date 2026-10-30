@@ -56,6 +56,19 @@
                             </a>
                         @endauth
                     </div>
+
+                    <div>
+                        <h2>Reviews</h2>
+                        @foreach($product->reviews as $review)
+                            <div class="border-t border-gray-200 py-4">
+                                <p class="font-semibold">{{ $review->user->name }}</p>
+                                <p class="text-sm text-gray-500">
+                                    Rating: {{ $review->rating }}/5
+                                </p>
+                                <p class="text-gray-600">{{ $review->comment }}</p>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </section>
         </div>
