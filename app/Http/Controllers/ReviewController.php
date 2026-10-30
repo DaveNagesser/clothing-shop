@@ -21,8 +21,8 @@ class ReviewController extends Controller
         ]);
 
         Review::create([
-            'user_id' => $request->user()->id,
-            'product_id' => $product->id,
+            'users_id' => $request->user()->id,
+            'products_id' => $product->id,
             'rating' => $validated['rating'],
             'comment' => $validated['comment'],
         ]);
