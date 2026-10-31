@@ -20,6 +20,8 @@
                         </option>
                     @endforeach
                 </select>
+
+                <input type="text" name="search" placeholder="Zoek product..." value="{{ request('search') }}">
             </form>
         </div>
 

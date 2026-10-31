@@ -18,8 +18,13 @@ class ProductController extends Controller
 
         $query = Product::with('category');
 
-        if ($categoryId) {
-            $query->where('category_id', $categoryId);
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->input('category'));
         }
 
         $products = $query->get();
