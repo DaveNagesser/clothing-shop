@@ -24,6 +24,7 @@ class Product extends Model
         'brand',
         'category_id',
         'image',
+        'purchased'
     ];
 
     public function reviews()

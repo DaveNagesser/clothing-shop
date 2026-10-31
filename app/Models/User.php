@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class, 'users_id');
     }
+
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
 }

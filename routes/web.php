@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
@@ -24,6 +25,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/products/{product}/reviews/create', [ReviewController::class, 'create'])->name('reviews.create');
     Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::post('/admin/products/{product}/stock', [AdminController::class, 'toggleAvailability'])->name('admin.products.toggle-availability');
 });
 
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');

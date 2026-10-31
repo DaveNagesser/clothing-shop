@@ -43,13 +43,15 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Settings') }}
                         </x-dropdown-link>
+
+                        @if(auth()->user()->isAdmin())
+                            <x-dropdown-link :href="route('admin.index')">
+                                {{ __('Admin Dashboard') }}
+                            </x-dropdown-link>
+                        @endif
                     </x-slot>
                 </x-dropdown>
             </div>
-            {{--            <a href="{{ route('dashboard') }}"--}}
-            {{--               class="border border-[#242321] px-4 py-2.5 transition hover:bg-[#242321] hover:text-white">--}}
-            {{--                Mijn account--}}
-            {{--            </a>--}}
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit"
